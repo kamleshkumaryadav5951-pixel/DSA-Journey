@@ -12,6 +12,6 @@ int binarytodec(int binarynum){
     return ans;
 }
 int main(){
-    cout<<binarytodec(1000)<<endl;
+    cout<<binarytodec(100)<<endl;
     return 0;
 }
