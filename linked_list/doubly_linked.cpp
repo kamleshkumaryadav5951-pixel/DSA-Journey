@@ -12,6 +12,14 @@ class Node {
         this -> prev = NULL;
         this -> next = NULL;
     }
+    ~Node(){
+        int value = this -> data;
+        if(this -> next != NULL){
+            delete next;
+            this -> next = NULL;
+        }
+        cout<<"memory is free for node with data"<<value << endl;
+    }
 };
 //travese linked list
 void print(Node* head){
@@ -85,6 +93,31 @@ void InsertAtPosition(Node* tail,Node* &head, int position, int d){
     temp ->next->prev = NodeToInsert;
     temp ->next = NodeToInsert;
 }
+void deletionOfNode(int position , Node* &head){
+    //delete first and last node
+    if(position == 1){
+        Node* temp = head;
+        temp ->next->prev = NULL;
+        head = temp-> next;
+        temp -> next = NULL;
+        delete temp;
+    }
+    //delete any middle node or last node
+    else{
+        Node* curr = head;
+        Node* prev = NULL;
+        int cnt = 1;
+        while(cnt < position){
+            prev = curr;
+            curr = curr -> next;
+            cnt++;
+        }
+        curr -> prev = NULL;
+        prev -> next = curr -> next;
+        curr -> next = NULL;
+        delete curr;
+    }
+}
 
 int main(){
    //Node* Node1 = new Node(10);
@@ -105,6 +138,12 @@ int main(){
     InsertAtPosition(tail,head,2,100);
     print(head);
     InsertAtPosition(tail,head,1,101);
+    print(head);
+    
+    InsertAtPosition(tail,head,5,105);
+    print(head);
+
+    deletionOfNode(5,head);
     print(head);
 
     return 0;
